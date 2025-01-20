@@ -471,6 +471,7 @@ MonoBehaviour:
   _levelCount: {fileID: 1742355296655435796}
   _description: {fileID: 1742355297457061935}
   _experienceCount: {fileID: 1742355295984593742}
+  _expSlider: {fileID: 1742355297341971113}
   _avatar: {fileID: 2556608857150532502}
   _statItemPrefab: {fileID: 7000781003558679037, guid: 893ea419988d3f24aaa8e5cde2a637e0, type: 3}
   _statsRoot: {fileID: 1742355295928163191}
@@ -1348,7 +1349,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.611
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1558,7 +1559,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 0.611
+  m_FillAmount: 0
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0

@@ -23,6 +23,7 @@ namespace UI
         [SerializeField] private TMP_Text _description;
         [SerializeField] private TMP_Text _experienceCount;
 
+        [SerializeField] private Slider _expSlider;
         [SerializeField] private AvatarItem _avatar;
         
         [SerializeField] private StatItem _statItemPrefab;
@@ -52,9 +53,14 @@ namespace UI
             _levelCount.text = "Level: " + currentCharacter.CharacterLevel.CurrentLevel;
             _experienceCount.text = "XP: " + currentCharacter.CharacterLevel.CurrentExperience + 
                                     " / " + currentCharacter.CharacterLevel.RequiredExperience;
+            
+            CalculateExpSliderValue(currentCharacter);
 
             ClearStatItems();
             SpawnStats(currentCharacter);
+
+            //TODO получать значения активна кнопка или нет
+            SwitchLevelUpButton(false);
         }
 
         private void SpawnStats(CharacterProfile characterProfile)
@@ -81,6 +87,18 @@ namespace UI
             }
                 
             _statItems.Clear();
+        }
+
+        private void CalculateExpSliderValue(CharacterProfile characterProfile)
+        {
+            if (characterProfile == null) return;
+            float calcValue = (float)characterProfile.CharacterLevel.CurrentExperience / characterProfile.CharacterLevel.RequiredExperience;
+            _expSlider.value = calcValue;
+        }
+
+        private void SwitchLevelUpButton(bool value)
+        {
+            _levelUpButton.interactable = value;
         }
         
         private void LevelUp()
