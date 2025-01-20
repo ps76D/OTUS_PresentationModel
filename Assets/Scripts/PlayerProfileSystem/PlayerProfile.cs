@@ -1,0 +1,41 @@
+﻿using System;
+using System.Collections.Generic;
+using Character;
+using UnityEngine;
+using Zenject;
+
+namespace PlayerProfileSystem
+{
+    [Serializable]
+    public class PlayerProfile
+    {
+        [SerializeField] private List<CharacterProfile> _characters;
+        public List<CharacterProfile> Characters => _characters;
+
+        [SerializeField] private CharacterProfile _currentCharacterProfile;
+        
+        public CharacterProfile CurrentCharacterProfile {
+            get => _currentCharacterProfile;
+            set => _currentCharacterProfile = value;
+        }
+
+        public PlayerProfile(CharacterDatabase characterDatabase)
+        {
+            _characters = CreateAllCharacters(characterDatabase);
+        }
+        
+        private List<CharacterProfile> CreateAllCharacters(CharacterDatabase characterDatabase)
+        {
+            var characters = new List<CharacterProfile>(); 
+            
+            foreach (var character in characterDatabase.CharacterInfoDatabase)
+            {
+                var characterProfile = new CharacterProfile(character);
+
+                characters.Add(characterProfile);
+            }
+
+            return characters;
+        }
+    }
+}
