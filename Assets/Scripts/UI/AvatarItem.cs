@@ -1,6 +1,7 @@
 ﻿using System;
 using Character;
 using PlayerProfileSystem;
+using UI.Model;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -17,14 +18,13 @@ namespace UI
 
         [SerializeField] private Button _button;
         
-        [SerializeField] private CharacterProfile _currentCharacterProfile;
+        /*[SerializeField] private CharacterProfile _currentCharacterProfile;*/
         
-        public PlayerProfile PlayerProfile {
+        /*public PlayerProfile PlayerProfile {
             set => _playerProfile = value;
-        }
-        public CharacterProfile CurrentCharacterProfile {
-            set => _currentCharacterProfile = value;
-        }
+        }*/
+        public CharacterProfile CurrentCharacterProfile { get; set; }
+        
         public UIManager UiManage {
             set => _uiManager = value;
         }
@@ -39,8 +39,10 @@ namespace UI
 
         private void OpenLevelUpPopup(UIScreen screen)
         {
-            _playerProfile.CurrentCharacterProfile = _currentCharacterProfile;
-            _uiManager.ShowScreen(screen);
+            /*_playerProfile.CurrentCharacterProfile = CurrentCharacterProfile;*/
+            
+            var viewModel = new LevelUpPopupModel(CurrentCharacterProfile);
+            _uiManager.LevelUpPopup.Show(viewModel);
         }
 
         public void SetIcon(Sprite sprite)

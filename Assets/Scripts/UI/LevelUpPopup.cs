@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using Character;
 using PlayerProfileSystem;
 using TMPro;
+using UI.Model;
+using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -11,9 +13,6 @@ namespace UI
 {
     public sealed class LevelUpPopup : UIScreen
     {
-        [Inject]
-        private PlayerProfile _playerProfile;
-        
         [SerializeField] private Button _closeButton;
         [SerializeField] private Button _closeFadeBackButton;
         [SerializeField] private Button _levelUpButton;
@@ -31,36 +30,56 @@ namespace UI
 
         [SerializeField] private List<StatItem> _statItems;
         
-        private void Start()
+        private readonly List<IDisposable> _disposables = new();
+        
+        private ILevelUpPopupModel _viewModel;
+        
+        public void Show(ILevelUpPopupModel viewModel)
         {
-            _closeButton.onClick.AddListener(() => _uiManager.CloseScreen(this));
-            _closeFadeBackButton.onClick.AddListener(() => _uiManager.CloseScreen(this));
+            _viewModel = viewModel;
+            gameObject.SetActive(true);
+            
+            _closeButton.onClick.AddListener(Hide);
+            _closeFadeBackButton.onClick.AddListener(Hide);
             _levelUpButton.onClick.AddListener(LevelUp);
+            
+            _disposables.Add(viewModel.LevelUpButtonIsInteractable.SubscribeToInteractable(_levelUpButton));
+            _disposables.Add(viewModel.CharacterProfile.CharacterLevel.CurrentExperience.Subscribe(UpdateExpDataAndSliderValue));
+            
+            ReinitializePopUp(viewModel);
         }
 
-        private void OnEnable()
+        private void Hide()
         {
-            ReinitializePopUp();
+            gameObject.SetActive(false);
+            
+            _closeButton.onClick.RemoveListener(() => _uiManager.CloseScreen(this));
+            _closeFadeBackButton.onClick.RemoveListener(() => _uiManager.CloseScreen(this));
+            _levelUpButton.onClick.RemoveListener(LevelUp);
+            
+            foreach (var disposable in _disposables)
+                disposable.Dispose();
         }
-
-        private void ReinitializePopUp()
+        
+        private void ReinitializePopUp(ILevelUpPopupModel viewModel)
         {
-            var currentCharacter = _playerProfile.CurrentCharacterProfile;
+            _avatar.SetIcon(viewModel.Icon);
+            _characterName.text = viewModel.Name;
+            _description.text = viewModel.Description;
+            _levelCount.text = viewModel.LevelCount;
+            _experienceCount.text = viewModel.ExperienceCount;
             
-            _avatar.SetIcon(currentCharacter.CharacterInfoData.CharacterIcon);
-            _characterName.text = currentCharacter.CharacterInfoData.CharacterName;
-            _description.text = currentCharacter.CharacterInfoData.CharacterDescription;
-            _levelCount.text = "Level: " + currentCharacter.CharacterLevel.CurrentLevel;
-            _experienceCount.text = "XP: " + currentCharacter.CharacterLevel.CurrentExperience + 
-                                    " / " + currentCharacter.CharacterLevel.RequiredExperience;
-            
-            CalculateExpSliderValue(currentCharacter);
+            SetExpSliderValue(viewModel.ExpSliderValue.Value);
 
             ClearStatItems();
-            SpawnStats(currentCharacter);
+            
+            SpawnStats(viewModel.CharacterProfile);
+        }
 
-            //TODO получать значения активна кнопка или нет
-            SwitchLevelUpButton(false);
+        private void UpdateExperience(ILevelUpPopupModel viewModel)
+        {
+            _levelCount.text = viewModel.LevelCount;
+            _experienceCount.text = viewModel.ExperienceCount;
         }
 
         private void SpawnStats(CharacterProfile characterProfile)
@@ -88,22 +107,20 @@ namespace UI
                 
             _statItems.Clear();
         }
-
-        private void CalculateExpSliderValue(CharacterProfile characterProfile)
+        private void UpdateExpDataAndSliderValue(int value)
         {
-            if (characterProfile == null) return;
-            float calcValue = (float)characterProfile.CharacterLevel.CurrentExperience / characterProfile.CharacterLevel.RequiredExperience;
-            _expSlider.value = calcValue;
+            UpdateExperience(_viewModel);
+            SetExpSliderValue(_viewModel.ExpSliderValue.Value);
         }
-
-        private void SwitchLevelUpButton(bool value)
+        private void SetExpSliderValue(float value)
         {
-            _levelUpButton.interactable = value;
+            _expSlider.value = value;
         }
         
         private void LevelUp()
         {
-            
+            _viewModel.LevelUp();
+            UpdateExperience(_viewModel);
         }
     }
 }

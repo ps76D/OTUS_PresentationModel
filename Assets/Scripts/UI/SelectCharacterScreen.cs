@@ -30,7 +30,7 @@ namespace UI
 
                 avatar.SetIcon(character.CharacterInfoData.CharacterIcon);
                 avatar.UiManage = _uiManager;
-                avatar.PlayerProfile = _playerProfile;
+                /*avatar.PlayerProfile = _playerProfile;*/
                 avatar.CurrentCharacterProfile = character;
                 _avatarItems.Add(avatar);
             }
