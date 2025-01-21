@@ -33,6 +33,7 @@ namespace UI
         private readonly List<IDisposable> _disposables = new();
         
         private ILevelUpPopupModel _viewModel;
+        public ILevelUpPopupModel ViewModel => _viewModel;
         
         public void Show(ILevelUpPopupModel viewModel)
         {
@@ -44,7 +45,12 @@ namespace UI
             _levelUpButton.onClick.AddListener(LevelUp);
             
             _disposables.Add(viewModel.LevelUpButtonIsInteractable.SubscribeToInteractable(_levelUpButton));
-            _disposables.Add(viewModel.CharacterProfile.CharacterLevel.CurrentExperience.Subscribe(UpdateExpDataAndSliderValue));
+            _disposables.Add(viewModel.CharacterProfile.CharacterLevel.CurrentExperience.
+                Subscribe(UpdateExpDataAndSliderValue));
+            
+            _disposables.Add(viewModel.CharacterProfile.CharacterInfo.Name.Subscribe(InitializeTexts));
+            _disposables.Add(viewModel.CharacterProfile.CharacterInfo.Description.Subscribe(InitializeTexts));
+            _disposables.Add(viewModel.CharacterProfile.CharacterInfo.Icon.Subscribe(InitializeIcon));
             
             ReinitializePopUp(viewModel);
         }
@@ -63,19 +69,37 @@ namespace UI
         
         private void ReinitializePopUp(ILevelUpPopupModel viewModel)
         {
-            _avatar.SetIcon(viewModel.Icon);
-            _characterName.text = viewModel.Name;
-            _description.text = viewModel.Description;
-            _levelCount.text = viewModel.LevelCount;
-            _experienceCount.text = viewModel.ExperienceCount;
+            InitializeIcon(viewModel);
+            InitializeTexts(viewModel);
             
-            SetExpSliderValue(viewModel.ExpSliderValue.Value);
+            UpdateExperience(viewModel);
+            SetExpSliderValue(viewModel.ExpSliderValue);
 
             ClearStatItems();
-            
             SpawnStats(viewModel.CharacterProfile);
         }
 
+        private void InitializeIcon(ILevelUpPopupModel viewModel)
+        {
+            _avatar.SetIcon(viewModel.Icon);
+        }
+        
+        private void InitializeIcon(Sprite value)
+        {
+            InitializeIcon(_viewModel);
+        }
+        
+        private void InitializeTexts(ILevelUpPopupModel viewModel)
+        {
+            _characterName.text = viewModel.Name;
+            _description.text = viewModel.Description;
+        }
+
+        private void InitializeTexts(string value)
+        {
+            InitializeTexts(_viewModel);
+        }
+        
         private void UpdateExperience(ILevelUpPopupModel viewModel)
         {
             _levelCount.text = viewModel.LevelCount;
@@ -90,7 +114,8 @@ namespace UI
             {
                 var statItem = Instantiate(_statItemPrefab, _statsRoot);
                 
-                statItem.SetStatData(stat);
+                var viewModel = new StatItemModel(stat);
+                statItem.Initialize(viewModel);
                 
                 _statItems.Add(statItem);
             }
@@ -110,7 +135,7 @@ namespace UI
         private void UpdateExpDataAndSliderValue(int value)
         {
             UpdateExperience(_viewModel);
-            SetExpSliderValue(_viewModel.ExpSliderValue.Value);
+            SetExpSliderValue(_viewModel.ExpSliderValue);
         }
         private void SetExpSliderValue(float value)
         {

@@ -6,6 +6,8 @@ namespace UI.Debug
 {
     public sealed class DebugPanel : UIScreen
     {
+        [SerializeField] private LevelUpPopup _levelUpPopup;
+        
         [SerializeField] private Button _showDebugButton;
         [SerializeField] private Button _hideDebugButton;
         [SerializeField] private Button _addExpButton;
@@ -21,7 +23,7 @@ namespace UI.Debug
 
         private void AddExperience()
         {
-            
+            _levelUpPopup.ViewModel.CharacterProfile.CharacterLevel.AddExperience(50);
         }
         
         

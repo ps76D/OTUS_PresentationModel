@@ -8,8 +8,6 @@ namespace UI
     {
         [SerializeField] private SelectCharacterScreen _selectCharacterScreen;
         [SerializeField] private LevelUpPopup _levelUpPopup;
-        
-        [SerializeField] private DebugPanel _debugPanel;
 
         public LevelUpPopup LevelUpPopup => _levelUpPopup;
 

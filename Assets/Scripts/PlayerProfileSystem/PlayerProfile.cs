@@ -11,14 +11,7 @@ namespace PlayerProfileSystem
     {
         [SerializeField] private List<CharacterProfile> _characters;
         public List<CharacterProfile> Characters => _characters;
-
-        [SerializeField] private CharacterProfile _currentCharacterProfile;
         
-        public CharacterProfile CurrentCharacterProfile {
-            get => _currentCharacterProfile;
-            set => _currentCharacterProfile = value;
-        }
-
         public PlayerProfile(CharacterDatabase characterDatabase)
         {
             _characters = CreateAllCharacters(characterDatabase);

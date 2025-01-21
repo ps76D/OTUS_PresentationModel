@@ -1854,6 +1854,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5207152496408468938, guid: 28932f884bdf97a41a0f054cb2e6a363, type: 3}
+      propertyPath: _levelUpPopup
+      value: 
+      objectReference: {fileID: 62486070536859852}
     - target: {fileID: 6344782845508089410, guid: 28932f884bdf97a41a0f054cb2e6a363, type: 3}
       propertyPath: m_Name
       value: DebugPanel

@@ -33,12 +33,11 @@ namespace Character
         [Button]
         public void LevelUp()
         {
-            if (CanLevelUp())
-            {
-                CurrentExperience.Value = 0;
-                CurrentLevel++;
-                OnLevelUp?.Invoke();
-            }
+            if (!CanLevelUp()) return;
+            
+            CurrentExperience.Value = 0;
+            CurrentLevel++;
+            OnLevelUp?.Invoke();
         }
 
         public bool CanLevelUp()

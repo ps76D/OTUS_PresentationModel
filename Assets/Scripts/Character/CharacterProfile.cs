@@ -7,12 +7,12 @@ namespace Character
     [Serializable]
     public class CharacterProfile
     {
+        [SerializeField] private CharacterInfoData _characterInfoData;
         [SerializeField] private CharacterInfo _characterInfo;
         [SerializeField] private CharacterLevel _characterLevel;
-        
+
         [SerializeField] private CharacterStatsInfo _characterStatsInfo;
-        [SerializeField] private CharacterInfoData _characterInfoData;
-        
+
         public CharacterInfo CharacterInfo => _characterInfo;
         public CharacterLevel CharacterLevel => _characterLevel;
         

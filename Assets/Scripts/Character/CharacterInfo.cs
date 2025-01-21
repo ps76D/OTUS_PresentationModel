@@ -1,5 +1,6 @@
 using System;
 using Sirenix.OdinInspector;
+using UniRx;
 using UnityEngine;
 
 namespace Character
@@ -9,35 +10,35 @@ namespace Character
     {
         public event Action<string> OnNameChanged;
         public event Action<string> OnDescriptionChanged;
-        public event Action<Sprite> OnIconChanged; 
+        public event Action<Sprite> OnIconChanged;
 
         [ShowInInspector, ReadOnly]
-        public string Name { get; private set; }
+        public IReactiveProperty<string> Name { get; private set; } = new ReactiveProperty<string>();
 
         [ShowInInspector, ReadOnly]
-        public string Description { get; private set; }
+        public IReactiveProperty<string> Description { get; private set; } = new ReactiveProperty<string>();
 
         [ShowInInspector, ReadOnly]
-        public Sprite Icon { get; private set; }
+        public IReactiveProperty<Sprite> Icon { get; private set; } = new ReactiveProperty<Sprite>();
 
         [Button]
         public void ChangeName(string name)
         {
-            Name = name;
+            Name.Value = name;
             OnNameChanged?.Invoke(name);
         }
 
         [Button]
         public void ChangeDescription(string description)
         {
-            Description = description;
+            Description.Value = description;
             OnDescriptionChanged?.Invoke(description);
         }
 
         [Button]
         public void ChangeIcon(Sprite icon)
         {
-            Icon = icon;
+            Icon.Value = icon;
             OnIconChanged?.Invoke(icon);
         }
     }

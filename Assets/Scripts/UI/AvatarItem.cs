@@ -10,19 +10,12 @@ namespace UI
 {
     public sealed class AvatarItem: MonoBehaviour
     {
-        [SerializeField] private PlayerProfile _playerProfile;
-        
         [SerializeField] private UIManager _uiManager;
         
         [SerializeField] private Image _icon;
 
         [SerializeField] private Button _button;
         
-        /*[SerializeField] private CharacterProfile _currentCharacterProfile;*/
-        
-        /*public PlayerProfile PlayerProfile {
-            set => _playerProfile = value;
-        }*/
         public CharacterProfile CurrentCharacterProfile { get; set; }
         
         public UIManager UiManage {
@@ -39,8 +32,6 @@ namespace UI
 
         private void OpenLevelUpPopup(UIScreen screen)
         {
-            /*_playerProfile.CurrentCharacterProfile = CurrentCharacterProfile;*/
-            
             var viewModel = new LevelUpPopupModel(CurrentCharacterProfile);
             _uiManager.LevelUpPopup.Show(viewModel);
         }

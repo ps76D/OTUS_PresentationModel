@@ -11,7 +11,7 @@ namespace UI.Model
         string Description { get; }
         string LevelCount { get; }
         string ExperienceCount { get; }
-        IReactiveProperty<float> ExpSliderValue { get; }
+        float ExpSliderValue { get; }
         Sprite Icon { get; }
         
         IReadOnlyReactiveProperty<bool> LevelUpButtonIsInteractable { get; }

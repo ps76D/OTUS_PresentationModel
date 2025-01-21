@@ -1,5 +1,6 @@
 using System;
 using Sirenix.OdinInspector;
+using UniRx;
 
 namespace Character
 {
@@ -11,12 +12,12 @@ namespace Character
         public string Name { get; set; }
 
         [ShowInInspector, ReadOnly]
-        public int Value { get; private set; }
+        public IReactiveProperty<int> Value { get; private set; } = new ReactiveProperty<int>();
 
         [Button]
         public void ChangeValue(int value)
         {
-            Value = value;
+            Value.Value = value;
             OnValueChanged?.Invoke(value);
         }
     }
