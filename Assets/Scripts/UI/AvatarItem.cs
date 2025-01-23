@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Character;
 using PlayerProfileSystem;
 using UI.Model;
@@ -26,11 +27,19 @@ namespace UI
         {
             if (_button)
             {
-                _button.onClick.AddListener(() => OpenLevelUpPopup(_uiManager.LevelUpPopup));
+                _button.onClick.AddListener(OpenLevelUpPopup);
             }
         }
 
-        private void OpenLevelUpPopup(UIScreen screen)
+        private void OnDestroy()
+        {
+            if (_button)
+            {
+                _button.onClick.RemoveListener(OpenLevelUpPopup);
+            }
+        }
+    
+        private void OpenLevelUpPopup()
         {
             var viewModel = new LevelUpPopupModel(CurrentCharacterProfile);
             _uiManager.LevelUpPopup.Show(viewModel);

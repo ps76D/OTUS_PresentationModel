@@ -27,8 +27,8 @@ namespace UI
         {
             SetStatData(_viewModel);
         }
-        
-        public void SetStatData(IStatItemModel view)
+
+        private void SetStatData(IStatItemModel view)
         {
             _statName.text = view.StatText;
         }
