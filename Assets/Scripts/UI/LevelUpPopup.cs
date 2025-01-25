@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Character;
 using TMPro;
 using UI.Model;
 using UniRx;
@@ -26,7 +25,7 @@ namespace UI
         [SerializeField] private StatItem _statItemPrefab;
         [SerializeField] private Transform _statsRoot;
 
-        [SerializeField] private List<StatItem> _statItems;
+        [SerializeField] private List<StatItem> _statItems = new();
         
         private readonly List<IDisposable> _disposables = new();
         
@@ -74,7 +73,7 @@ namespace UI
             SetExpSliderValue(viewModel.ExpSliderValue);
 
             ClearStatItems();
-            SpawnStats(viewModel.CharacterProfile);
+            SpawnStats(viewModel);
         }
 
         private void InitializeIcon(ILevelUpPopupModel viewModel)
@@ -104,16 +103,13 @@ namespace UI
             _experienceCount.text = viewModel.ExperienceCount;
         }
 
-        private void SpawnStats(CharacterProfile characterProfile)
+        private void SpawnStats(ILevelUpPopupModel viewModel)
         {
-            _statItems = new List<StatItem>();
-
-            foreach (var stat in characterProfile.CharacterStatsInfo.GetStats())
+            foreach (var statViewModel in viewModel.StatItemModels)
             {
                 var statItem = Instantiate(_statItemPrefab, _statsRoot);
-                
-                var viewModel = new StatItemModel(stat);
-                statItem.Initialize(viewModel);
+
+                statItem.Initialize(statViewModel);
                 
                 _statItems.Add(statItem);
             }
@@ -130,11 +126,13 @@ namespace UI
                 
             _statItems.Clear();
         }
+        
         private void UpdateExpDataAndSliderValue(int value)
         {
             UpdateExperience(_viewModel);
             SetExpSliderValue(_viewModel.ExpSliderValue);
         }
+        
         private void SetExpSliderValue(float value)
         {
             _expSlider.value = value;

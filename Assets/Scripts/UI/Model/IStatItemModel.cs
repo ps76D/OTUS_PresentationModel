@@ -1,9 +1,8 @@
-﻿using System;
-using Character;
+﻿using Character;
 
 namespace UI.Model
 {
-    public interface IStatItemModel: IDisposable
+    public interface IStatItemModel
     {
         string StatText { get; }
         

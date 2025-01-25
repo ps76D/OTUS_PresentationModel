@@ -2,7 +2,7 @@
 
 namespace UI.Model
 {
-    public class StatItemModel
+    public class StatItemModel : IStatItemModel
     {
         public string StatText => SetStatText();
 

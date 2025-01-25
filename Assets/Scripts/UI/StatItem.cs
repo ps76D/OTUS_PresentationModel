@@ -11,11 +11,11 @@ namespace UI
     {
         [SerializeField] private TMP_Text _statName;
         
-        private StatItemModel _viewModel;
+        private IStatItemModel _viewModel;
         
         private readonly List<IDisposable> _disposables = new();
 
-        public void Initialize(StatItemModel viewModel)
+        public void Initialize(IStatItemModel viewModel)
         {
             _viewModel = viewModel;
             
@@ -27,7 +27,7 @@ namespace UI
             SetStatData(_viewModel);
         }
 
-        private void SetStatData(StatItemModel view)
+        private void SetStatData(IStatItemModel view)
         {
             _statName.text = view.StatText;
         }
