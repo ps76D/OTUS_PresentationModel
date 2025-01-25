@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using PlayerProfileSystem;
 using UnityEngine;
 using Zenject;
@@ -13,17 +12,17 @@ namespace UI
         
         [SerializeField] private Transform _avatarsSpawnRoot;
         [SerializeField] private AvatarItem _avatarItemPrefab;
-        [SerializeField] private List<AvatarItem> _avatarItems;
+        [SerializeField] private List<AvatarItem> _avatarItems = new ();
 
         private void Start()
         {
-            _avatarItems = new List<AvatarItem>();
-            
             SpawnCharacterAvatars();
         }
 
         private void SpawnCharacterAvatars()
         {
+            _avatarItems.Clear();
+            
             foreach (var character in _playerProfile.Characters)
             {
                 var avatar = Instantiate(_avatarItemPrefab, _avatarsSpawnRoot);

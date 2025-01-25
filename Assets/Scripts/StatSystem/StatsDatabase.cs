@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace StatSystem
 {
@@ -8,6 +7,6 @@ namespace StatSystem
     public sealed class StatsDatabase : ScriptableObject
     {
         [SerializeField] private List<StatData> _startStatsDatabase;
-        public List<StatData> StartStatsDatabase => _startStatsDatabase;
+        public IReadOnlyList<StatData> StartStatsDatabase => _startStatsDatabase;
     }
 }

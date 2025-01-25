@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using Character;
-using PlayerProfileSystem;
+﻿using Character;
 using UI.Model;
 using UnityEngine;
 using UnityEngine.UI;
-using Zenject;
 
 namespace UI
 {
@@ -19,7 +15,8 @@ namespace UI
         
         public CharacterProfile CurrentCharacterProfile { get; set; }
         
-        public UIManager UiManage {
+        public UIManager UiManage 
+        {
             set => _uiManager = value;
         }
 

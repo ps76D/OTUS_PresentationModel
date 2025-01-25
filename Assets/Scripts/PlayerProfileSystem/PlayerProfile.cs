@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Character;
 using UnityEngine;
-using Zenject;
 
 namespace PlayerProfileSystem
 {
@@ -10,7 +9,7 @@ namespace PlayerProfileSystem
     public class PlayerProfile
     {
         [SerializeField] private List<CharacterProfile> _characters;
-        public List<CharacterProfile> Characters => _characters;
+        public IReadOnlyList<CharacterProfile> Characters => _characters;
         
         public PlayerProfile(CharacterDatabase characterDatabase)
         {

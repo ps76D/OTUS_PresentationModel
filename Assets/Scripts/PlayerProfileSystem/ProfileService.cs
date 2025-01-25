@@ -1,7 +1,5 @@
 ﻿using System;
-using Character;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Zenject;
 
 namespace PlayerProfileSystem

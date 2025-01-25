@@ -1,6 +1,4 @@
-﻿using System;
-using UI.Debug;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace UI
 {

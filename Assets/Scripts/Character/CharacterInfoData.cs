@@ -1,8 +1,6 @@
 ﻿using System;
 using StatSystem;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Character
 {

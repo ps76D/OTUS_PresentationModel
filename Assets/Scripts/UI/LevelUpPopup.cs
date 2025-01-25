@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using Character;
-using PlayerProfileSystem;
 using TMPro;
 using UI.Model;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
-using Zenject;
 
 namespace UI
 {
@@ -59,8 +57,8 @@ namespace UI
         {
             gameObject.SetActive(false);
             
-            _closeButton.onClick.RemoveListener(() => _uiManager.CloseScreen(this));
-            _closeFadeBackButton.onClick.RemoveListener(() => _uiManager.CloseScreen(this));
+            _closeButton.onClick.RemoveListener(Hide);
+            _closeFadeBackButton.onClick.RemoveListener(Hide);
             _levelUpButton.onClick.RemoveListener(LevelUp);
             
             foreach (var disposable in _disposables)

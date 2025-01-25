@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using Character;
+﻿using Character;
 
 namespace UI.Model
 {
-    public class StatItemModel: IStatItemModel
+    public class StatItemModel
     {
         public string StatText => SetStatText();
 
         public CharacterStat CharacterStat { get; }
-        
-        private readonly List<IDisposable> _disposables = new();
 
         public StatItemModel(CharacterStat characterStat)
         {
@@ -21,18 +17,12 @@ namespace UI.Model
         {
             CharacterStat.ChangeValue(value);
         }
-        
+
         private string SetStatText()
         {
             string statText = CharacterStat.Name + ": " + CharacterStat.Value;
 
             return statText;
-        }
-
-        public void Dispose()
-        {
-            foreach (var disposable in _disposables)
-                disposable.Dispose();
         }
     }
 }

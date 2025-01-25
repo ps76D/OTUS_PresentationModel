@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Character;
 using TMPro;
 using UI.Model;
 using UniRx;
@@ -12,11 +11,11 @@ namespace UI
     {
         [SerializeField] private TMP_Text _statName;
         
-        private IStatItemModel _viewModel;
+        private StatItemModel _viewModel;
         
         private readonly List<IDisposable> _disposables = new();
 
-        public void Initialize(IStatItemModel viewModel)
+        public void Initialize(StatItemModel viewModel)
         {
             _viewModel = viewModel;
             
@@ -28,7 +27,7 @@ namespace UI
             SetStatData(_viewModel);
         }
 
-        private void SetStatData(IStatItemModel view)
+        private void SetStatData(StatItemModel view)
         {
             _statName.text = view.StatText;
         }

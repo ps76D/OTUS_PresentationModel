@@ -13,15 +13,15 @@ MonoBehaviour:
   m_Name: OrcBerserkerStats
   m_EditorClassIdentifier: 
   _startStatsDatabase:
-  - _statInfo: {fileID: 11400000, guid: e071be9b339e8774f82913f48d9db425, type: 2}
+  - _statInfoData: {fileID: 11400000, guid: e071be9b339e8774f82913f48d9db425, type: 2}
     _startStatValue: 30
-  - _statInfo: {fileID: 11400000, guid: 61f1de6342319704ca55acc7852356d2, type: 2}
+  - _statInfoData: {fileID: 11400000, guid: 61f1de6342319704ca55acc7852356d2, type: 2}
     _startStatValue: 50
-  - _statInfo: {fileID: 11400000, guid: 38235d8b074e5744f82dfafb9a92f379, type: 2}
+  - _statInfoData: {fileID: 11400000, guid: 38235d8b074e5744f82dfafb9a92f379, type: 2}
     _startStatValue: 15
-  - _statInfo: {fileID: 11400000, guid: ef2bc2625d3f10748ba29f7dad840511, type: 2}
+  - _statInfoData: {fileID: 11400000, guid: ef2bc2625d3f10748ba29f7dad840511, type: 2}
     _startStatValue: 5
-  - _statInfo: {fileID: 11400000, guid: b72d0a0744470d64cbe0830e9f5c8fda, type: 2}
+  - _statInfoData: {fileID: 11400000, guid: b72d0a0744470d64cbe0830e9f5c8fda, type: 2}
     _startStatValue: 90
-  - _statInfo: {fileID: 11400000, guid: e0ce2d2c241250c4db4f0444a281ee06, type: 2}
+  - _statInfoData: {fileID: 11400000, guid: e0ce2d2c241250c4db4f0444a281ee06, type: 2}
     _startStatValue: 15
