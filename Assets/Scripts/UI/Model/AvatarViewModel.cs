@@ -5,15 +5,18 @@ namespace UI.Model
 {
     public class AvatarViewModel : IAvatarViewModel
     {
-        public string Name => _characterProfile.CharacterInfo.Name.Value;
-        public string Description => _characterProfile.CharacterInfo.Description.Value;
-        public Sprite Icon => _characterProfile.CharacterInfo.Icon.Value;
+        public string Name => CharacterProfile.CharacterInfo.Name.Value;
+        public string Description => CharacterProfile.CharacterInfo.Description.Value;
+        public Sprite Icon => CharacterProfile.CharacterInfo.Icon.Value;
 
-        private readonly CharacterProfile _characterProfile;
+        public CharacterProfile CharacterProfile 
+        {
+            get;
+        }
 
         public AvatarViewModel(CharacterProfile characterProfile)
         {
-            _characterProfile = characterProfile;
+            CharacterProfile = characterProfile;
         }
     }
 }

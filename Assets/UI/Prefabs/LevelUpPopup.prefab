@@ -384,6 +384,7 @@ GameObject:
   - component: {fileID: 62486070536859852}
   - component: {fileID: 7796813302641605633}
   - component: {fileID: 3992275370618508729}
+  - component: {fileID: 7968962644614342500}
   m_Layer: 5
   m_Name: LevelUpPopup
   m_TagString: Untagged
@@ -440,6 +441,7 @@ MonoBehaviour:
   _levelUpButton: {fileID: 1742355297889493180}
   _avatarView: {fileID: 7796813302641605633}
   _levelView: {fileID: 3992275370618508729}
+  _statsView: {fileID: 7968962644614342500}
   _statItemViewPrefab: {fileID: 7000781003558679037, guid: 893ea419988d3f24aaa8e5cde2a637e0, type: 3}
   _statsRoot: {fileID: 1742355295928163191}
   _statItems: []
@@ -473,6 +475,21 @@ MonoBehaviour:
   _levelCount: {fileID: 1742355296655435796}
   _experienceCount: {fileID: 1742355295984593742}
   _expSlider: {fileID: 1742355297341971113}
+--- !u!114 &7968962644614342500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1742355296116057490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdd4d326d0d347408afaf0cdd50ad5a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _statItemViewPrefab: {fileID: 7000781003558679037, guid: 893ea419988d3f24aaa8e5cde2a637e0, type: 3}
+  _statsRoot: {fileID: 1742355295928163191}
+  _statItems: []
 --- !u!1 &1742355296127802988
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Character;
+using UnityEngine;
 
 namespace UI.Model
 {
@@ -8,5 +9,7 @@ namespace UI.Model
         string Description { get; }
 
         Sprite Icon { get; }
+        
+        CharacterProfile CharacterProfile { get; }
     }
 }

@@ -17,10 +17,7 @@ namespace UI
         [SerializeField] private AvatarView _avatarView;
         [SerializeField] private LevelView _levelView;
 
-        [SerializeField] private StatItemView _statItemViewPrefab;
-        [SerializeField] private Transform _statsRoot;
-
-        [SerializeField] private List<StatItemView> _statItems = new();
+        [SerializeField] private StatsView _statsView;
 
         private readonly List<IDisposable> _disposables = new();
         
@@ -38,12 +35,6 @@ namespace UI
             _levelUpButton.onClick.AddListener(LevelUp);
             
             _disposables.Add(viewModel.LevelUpButtonIsInteractable.SubscribeToInteractable(_levelUpButton));
-            _disposables.Add(viewModel.CharacterProfile.CharacterLevel.CurrentExperience.
-                Subscribe(UpdateExpDataAndSliderValue));
-            
-            _disposables.Add(viewModel.CharacterProfile.CharacterInfo.Name.Subscribe(UpdateTexts));
-            _disposables.Add(viewModel.CharacterProfile.CharacterInfo.Description.Subscribe(UpdateTexts));
-            _disposables.Add(viewModel.CharacterProfile.CharacterInfo.Icon.Subscribe(UpdateIcon));
             
             ReinitializePopUp(viewModel);
         }
@@ -64,9 +55,7 @@ namespace UI
         {
             InitializeAvatarView(viewModel.AvatarViewModel);
             InitializeLevelView(viewModel.ExperienceSliderViewModel);
-
-            ClearStatItems();
-            SpawnStats(viewModel);
+            InitializeStatsView(viewModel.StatsViewModel);
         }
 
         private void InitializeAvatarView(IAvatarViewModel avatarViewModel)
@@ -78,46 +67,10 @@ namespace UI
         {
             _levelView.Initialize(viewModel);
         }
-
-        private void UpdateIcon(Sprite sprite)
+        
+        private void InitializeStatsView(IStatsViewModel viewModel)
         {
-            _avatarView.Initialize(_viewModel.AvatarViewModel);
-        }
-
-        private void UpdateTexts(string value)
-        {
-            _avatarView.Initialize(_viewModel.AvatarViewModel);
-        }
-
-        private void UpdateExpDataAndSliderValue(int value)
-        {
-            _levelView.Initialize(_viewModel.ExperienceSliderViewModel);
-        }
-
-        private void SpawnStats(ILevelUpPopupModel viewModel)
-        {
-            int index;
-            for (index = 0; index < viewModel.StatItemModels.Count; index++)
-            {
-                IStatItemModel statViewModel = viewModel.StatItemModels[index];
-                var statItem = Instantiate(_statItemViewPrefab, _statsRoot);
-
-                statItem.Initialize(statViewModel);
-
-                _statItems.Add(statItem);
-            }
-        }
-
-        private void ClearStatItems()
-        {
-            if (_statItems is not { Count: > 0 }) return;
-            
-            foreach (var statItem in _statItems)
-            {
-                DestroyImmediate(statItem.gameObject);
-            }
-                
-            _statItems.Clear();
+            _statsView.Initialize(viewModel);
         }
         
         private void LevelUp()
