@@ -92,7 +92,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _uiManager: {fileID: 0}
   _avatarsSpawnRoot: {fileID: 4419661795923484016}
-  _avatarItemPrefab: {fileID: 457936871866238756, guid: 040ed8eb845d4a6479d407b707a1dbaf, type: 3}
+  _avatarButtonPrefab: {fileID: 457936871866238756, guid: 040ed8eb845d4a6479d407b707a1dbaf, type: 3}
   _avatarItems: []
 --- !u!1 &4419661795923484023
 GameObject:

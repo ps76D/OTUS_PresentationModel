@@ -10,12 +10,6 @@ namespace PlayerProfileSystem
         [Inject]
         [SerializeField] private PlayerProfile _playerProfile;
         
-        public PlayerProfile PlayerProfile
-        {
-            get => _playerProfile;
-            set => _playerProfile = value;
-        }
-        
         public ProfileService()
         {
             ProfileDebuggerInitialize();

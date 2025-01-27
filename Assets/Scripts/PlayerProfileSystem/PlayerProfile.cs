@@ -18,10 +18,12 @@ namespace PlayerProfileSystem
         
         private List<CharacterProfile> CreateAllCharacters(CharacterDatabase characterDatabase)
         {
-            var characters = new List<CharacterProfile>(); 
-            
-            foreach (var character in characterDatabase.CharacterInfoDatabase)
+            var characters = new List<CharacterProfile>();
+
+            int index;
+            for (index = 0; index < characterDatabase.CharacterInfoDatabase.Count; index++)
             {
+                CharacterInfoData character = characterDatabase.CharacterInfoDatabase[index];
                 var characterProfile = new CharacterProfile(character);
 
                 characters.Add(characterProfile);

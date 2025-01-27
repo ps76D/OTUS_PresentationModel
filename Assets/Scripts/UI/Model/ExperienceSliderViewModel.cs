@@ -4,7 +4,7 @@ namespace UI.Model
 {
     public class ExperienceSliderViewModel : IExperienceSliderViewModel
     {
-
+        public string LevelCount => SetLevelCountText();
         public string ExperienceCount => SetExperienceCountText();
 
         public float ExpSliderValue => CalculateExpSliderValue();
@@ -16,18 +16,24 @@ namespace UI.Model
             _characterProfile = characterProfile;
         }
         
-        public string SetExperienceCountText()
+        private string SetExperienceCountText()
         {
             string experienceCount = "XP: " + _characterProfile.CharacterLevel.CurrentExperience.Value + 
                                      " / " + _characterProfile.CharacterLevel.RequiredExperience;
             return experienceCount;
         }
         
-        public float CalculateExpSliderValue()
+        private float CalculateExpSliderValue()
         {
             float calcValue = (float)_characterProfile.CharacterLevel.CurrentExperience.Value
                               / _characterProfile.CharacterLevel.RequiredExperience;
             return calcValue;
+        }
+        
+        private string SetLevelCountText()
+        {
+            string levelCount = "Level: " + _characterProfile.CharacterLevel.CurrentLevel;
+            return levelCount;
         }
     }
 }

@@ -2,18 +2,13 @@
 using System.Collections.Generic;
 using Character;
 using UniRx;
-using UnityEngine;
 
 namespace UI.Model
 {
     public interface ILevelUpPopupModel: IDisposable
     {
-        string Name { get; }
-        string Description { get; }
-        string LevelCount { get; }
-        string ExperienceCount { get; }
-        float ExpSliderValue { get; }
-        Sprite Icon { get; }
+        IAvatarViewModel AvatarViewModel { get; }
+        IExperienceSliderViewModel ExperienceSliderViewModel { get; }
         
         IReadOnlyList<IStatItemModel> StatItemModels { get; }
         

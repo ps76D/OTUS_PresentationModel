@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace UI
 {
-    public sealed class AvatarItem: MonoBehaviour
+    public sealed class AvatarButton: MonoBehaviour
     {
         [SerializeField] private UIManager _uiManager;
         
@@ -42,7 +42,7 @@ namespace UI
             _uiManager.LevelUpPopup.Show(viewModel);
         }
 
-        public void SetIcon(Sprite sprite)
+        public void SetSpriteIcon(Sprite sprite)
         {
             _icon.sprite = sprite;
         }

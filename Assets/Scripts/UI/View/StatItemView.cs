@@ -5,9 +5,9 @@ using UI.Model;
 using UniRx;
 using UnityEngine;
 
-namespace UI
+namespace UI.View
 {
-    public sealed class StatItem : MonoBehaviour, IDisposable
+    public sealed class StatItemView : MonoBehaviour, IDisposable
     {
         [SerializeField] private TMP_Text _statName;
         

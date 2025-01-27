@@ -11,8 +11,8 @@ namespace UI
         private PlayerProfile _playerProfile;
         
         [SerializeField] private Transform _avatarsSpawnRoot;
-        [SerializeField] private AvatarItem _avatarItemPrefab;
-        [SerializeField] private List<AvatarItem> _avatarItems = new ();
+        [SerializeField] private AvatarButton _avatarButtonPrefab;
+        [SerializeField] private List<AvatarButton> _avatarItems = new ();
 
         private void Start()
         {
@@ -25,9 +25,9 @@ namespace UI
             
             foreach (var character in _playerProfile.Characters)
             {
-                var avatar = Instantiate(_avatarItemPrefab, _avatarsSpawnRoot);
+                var avatar = Instantiate(_avatarButtonPrefab, _avatarsSpawnRoot);
 
-                avatar.SetIcon(character.CharacterInfoData.CharacterIcon);
+                avatar.SetSpriteIcon(character.CharacterInfoData.CharacterIcon);
                 avatar.UiManage = _uiManager;
                 avatar.CurrentCharacterProfile = character;
                 _avatarItems.Add(avatar);

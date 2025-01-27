@@ -2,21 +2,11 @@
 using System.Collections.Generic;
 using Character;
 using UniRx;
-using UnityEngine;
 
 namespace UI.Model
 {
     public class LevelUpPopupModel: ILevelUpPopupModel
     {
-        public string Name => _avatarViewModel.Name;
-        public string Description => _avatarViewModel.Description;
-        public Sprite Icon => _avatarViewModel.Icon;
-
-        public string LevelCount => SetLevelCountText(CharacterProfile);
-
-        public string ExperienceCount => _experienceSliderViewModel.SetExperienceCountText();
-        public float ExpSliderValue => _experienceSliderViewModel.CalculateExpSliderValue();
-        
         public IReadOnlyList<IStatItemModel> StatItemModels => SetStatItemModels(CharacterProfile);
 
         public IReadOnlyReactiveProperty<bool> LevelUpButtonIsInteractable => _levelUpButtonIsInteractable;
@@ -25,7 +15,10 @@ namespace UI.Model
         public CharacterProfile CharacterProfile { get; }
         
         private readonly AvatarViewModel _avatarViewModel;
+        public IAvatarViewModel AvatarViewModel => _avatarViewModel; 
+
         private readonly ExperienceSliderViewModel _experienceSliderViewModel;
+        public IExperienceSliderViewModel ExperienceSliderViewModel => _experienceSliderViewModel;
 
         private readonly List<IDisposable> _disposables = new();
 
@@ -39,12 +32,6 @@ namespace UI.Model
             var levelUpInteractableSubscription = characterProfile.CharacterLevel.CurrentExperience.
                 Subscribe(count => _levelUpButtonIsInteractable.Value = CharacterProfile.CharacterLevel.CanLevelUp());
             _disposables.Add(levelUpInteractableSubscription);
-        }
-
-        private string SetLevelCountText(CharacterProfile characterProfile)
-        {
-            string levelCount = "Level: " + characterProfile.CharacterLevel.CurrentLevel;
-            return levelCount;
         }
         
         public void LevelUp()

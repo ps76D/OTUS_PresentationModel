@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 2022838144800971846}
   - component: {fileID: 457936871866238756}
   m_Layer: 5
-  m_Name: AvatarItem
+  m_Name: AvatarButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

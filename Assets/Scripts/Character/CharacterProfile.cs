@@ -1,4 +1,5 @@
 ﻿using System;
+using StatSystem;
 using UnityEngine;
 
 namespace Character
@@ -42,18 +43,20 @@ namespace Character
         {
             var characterStatsInfo = new CharacterStatsInfo();
 
-            foreach (var statData in characterInfoData.StatsDatabase.StartStatsDatabase)
+            int index;
+            for (index = 0; index < characterInfoData.StatsDatabase.StartStatsDatabase.Count; index++)
             {
+                StatData statData = characterInfoData.StatsDatabase.StartStatsDatabase[index];
                 var stat = new CharacterStat()
                 {
                     Name = statData._statInfoData.StatName,
                 };
-                
+
                 stat.ChangeValue(statData._startStatValue);
-                
+
                 characterStatsInfo.AddStat(stat);
             }
-            
+
             return characterStatsInfo;
         }
     }
